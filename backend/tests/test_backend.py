@@ -278,3 +278,22 @@ def test_demo_seeding_and_report(client):
     assert md_res.status_code == 200
     assert "Classroom Multimodal Session Report" in md_res.text
 
+# 10. Single-Link Unified Frontend Serving Test
+def test_single_link_frontend_serving(client):
+    # Root should serve the React SPA index.html
+    root_res = client.get("/")
+    assert root_res.status_code == 200
+    assert "text/html" in root_res.headers.get("content-type", "")
+    assert '<div id="root">' in root_res.text
+
+    # Client-side routes (SPA fallback) should also serve index.html
+    spa_res = client.get("/attendance")
+    assert spa_res.status_code == 200
+    assert '<div id="root">' in spa_res.text
+
+    # API root should return JSON
+    api_res = client.get("/api")
+    assert api_res.status_code == 200
+    assert "project" in api_res.json()
+
+

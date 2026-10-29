@@ -1,7 +1,11 @@
 @echo off
-echo Starting Multimodal Attendance & Engagement Agent...
-start "Multimodal Agent - Backend API" cmd /k "run_backend.bat"
-start "Multimodal Agent - React UI" cmd /k "run_frontend.bat"
-echo Both servers launched! Opening browser at http://localhost:5173 ...
-timeout /t 3 >nul
-start http://localhost:5173
+echo ======================================================================
+echo  Multimodal Attendance & Engagement Agent
+echo  Stack: Streamlit + OpenCV + MediaPipe + Librosa + Python 3.9+
+echo ======================================================================
+echo.
+echo Launching Streamlit Unified Web Application at http://localhost:8501 ...
+echo.
+
+.\venv\Scripts\streamlit.exe run streamlit_app.py
+pause
